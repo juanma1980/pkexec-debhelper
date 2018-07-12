@@ -1,0 +1,13 @@
+#!/bin/bash
+[ -n "$POLKIT_LIB" ] || POLKIT_LIB="/usr/share/polkit-debhelper/polkit-debhelper-library.sh"
+[ -s "${POLKIT_LIB}" ] || exit 1
+. ${POLKIT_LIB}
+
+# main
+
+debian_test
+ALL_PKGS="$(read_list_pkg_generated)"
+
+for package in ${ALL_PKGS} ; do
+    apply_polkit_debian_configs "$package"
+done
