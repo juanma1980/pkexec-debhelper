@@ -1,10 +1,4 @@
-polkit-debhelper (0.1-1) artful; urgency=medium
-
-  * fix global substitution into skel file
-
- -- M.Angel Juan <m.angel.juan@gmail.com>  Tue, 16 Jan 2018 18:02:16 +0100
-
-polkit-debhelper (0.1) artful; urgency=medium
+polkit-debhelper (0.1) bionic; urgency=medium
 
   * Initial Release.
 
