@@ -1,5 +1,5 @@
 #!/bin/bash
-[ -n "$POLKIT_LIB" ] || POLKIT_LIB="/usr/share/polkit-debhelper/polkit-debhelper-library.sh"
+[ -n "$POLKIT_LIB" ] || POLKIT_LIB="/usr/share/pkexec-debhelper/polkit-debhelper-library.sh"
 [ -s "${POLKIT_LIB}" ] || exit 1
 . ${POLKIT_LIB}
 

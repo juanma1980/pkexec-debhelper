@@ -45,6 +45,11 @@ read_list_pkg_generated(){
     [ -f "debian/control" ] && sed -ne "/${REG_EXP}/s%${REG_EXP}[[:space:]]*%%p" "debian/control"
 }
 
+read_source_name(){
+    REG_EXP="^Source:"
+    [ -f "debian/control" ] && sed -ne "/${REG_EXP}/s%${REG_EXP}[[:space:]]*%%p" "debian/control"
+}
+
 add_mant_script(){
     MANT_SCR="$1"
     shift
@@ -58,18 +63,6 @@ add_mant_script(){
         echo "$1" >> "$SCR_FILE"
         shift
     done
-}
-
-add_postinst(){
-    add_mant_script postinst "$@"
-}
-
-add_prerm(){
-    add_mant_script prerm "$@"
-}
-
-add_postrm(){
-    add_mant_script postrm "$@"
 }
 
 add_var(){
@@ -89,11 +82,51 @@ add_depends_polkit(){
     add_depends "$1" "policykit-1"
 }
 
+add_depends_xpkexec(){
+    add_depends "$1" "xpkexec"
+}
+
+process_pkexec_file(){
+
+	
+	PKG=$1
+	shift
+	FILETOREAD=$1
+	while read line; do
+		if [ "$line" = "" ]; then
+			DESTFOLDER="debian/${PKG}.polkit.action"
+			mkdir -p $DESTFOLDER
+			polkit_gen_action $CMD $PREFIX $PKG $ICON > "${DESTFOLDER}/${PREFIX}.${PKG}"
+			if [ "$XREQUIRED" = "yes" ]; then
+				add_depends_xpkexec $PKG
+			fi
+			unset CMD PREFIX ICON XREQUIRE
+		else
+			KEY=${line%%=*}
+		        VAL=${line#*=}
+		        case $KEY in
+                		CMD|ICON|XREQUIRED|PREFIX)
+		                        declare $KEY="$VAL"
+                	        ;;
+		        esac
+		fi
+
+	done < $FILETOREAD
+
+	if [ "$CMD" != "" ]; then
+		mkdir -p $DESTFOLDER
+                polkit_gen_action $CMD $PREFIX $PKG $ICON > "${DESTFOLDER}/${PREFIX}.${PKG}"
+                if [ "$XREQUIRED" = "yes" ]; then
+                   add_depends_xpkexec $PKG
+                fi
+	fi
+}
+
+
 apply_polkit_debian_configs(){
     # read polkit configuration files when packaging binary install debfile
     # first parameter is a binary package name
 
-    # TODO: Add custom debian/pkgname.polkit custom configuration
     P="$1"
     FPATH="debian"
     EXT="polkit"
@@ -101,41 +134,52 @@ apply_polkit_debian_configs(){
     # Check number of packages generated , if only one is generated both names are permitted else packagename.polkit is required
     # Example: packagefilename.polkit.action, packagefile.polkit.rule, polkit.action, polkit.rule 
     npkgs=$(read_list_pkg_generated|wc -l)
+    SOURCENAME=read_source_name
+
+    ###
+    ## Find existing pkexec or packagename.pkexec file
+    ###
+    if [ "$SOURCENAME" = "$P" -a -e "debian/pkexec" ]; then
+	    mv debian/pkexec debian/$P.pkexec
+    fi
+    PKEXECPATH=$(find ${FPATH} -name "${P}.pkexec")
+    if [ -n "$PKEXECPATH" ];
+	    process_pkexec_file $P $PKEXECPATH
+    fi
+
+
     for typefile in "action" "rule"; do
         dname=""
-        debugn "Searching dir ${FPATH}/${P}.${EXT}.${typefile}"
+	if [ "$SOURCENAME" = "$P" -a -d "${FPATH}/${EXT}.${typefile}" ]; then
+		mv ${FPATH}/${EXT}.${typefile} ${FPATH}/$P.${EXT}.${typefile}
+	fi
+	
         if [ -d "${FPATH}/${P}.${EXT}.${typefile}" ]; then 
             dname="${FPATH}/${P}.${EXT}.${typefile}" 
-            debug " found !!!"
-        else
-            debug " not found !!!"
         fi
-        if [ "x${npkgs}" = "x1" ]; then
-            debugn "Searching for ${FPATH}/${EXT}.${typefile}"
-            if [ -d "${FPATH}/${EXT}.${typefile}" ]; then 
-                dname="${FPATH}/${EXT}.${typefile}"
-                debug " found !!!"
-            else
-                debug " not found !!!"
-            fi
-        fi
+
+	###
+	## Install all actions and rules
+	###
         if [ -n "${dname}" ]; then
             naction=0
             for filepolkit in $(ls "${dname}/"); do 
-                [ "${typefile}" = "action" ] && debug "Copying polkit action (${dname}/${filepolkit}) found on package ${P}!" && mkdir -p "${FPATH}/${P}${POLKIT_PATH_ACTIONS}" && cp ${dname}/${filepolkit} ${FPATH}/${P}${POLKIT_PATH_ACTIONS}/${filepolkit}.${naction}.policy
-                [ "${typefile}" = "rule" ] && debug "Copying polkit rule (${dname}/${filepolkit}) found on package ${P}!" && mkdir -p "${FPATH}/${P}${POLKIT_PATH_RULES}" && cp ${dname}/${filepolkit} ${FPATH}/${P}${POLKIT_PATH_RULES}/${filepolkit}.${naction}.rules
+		debug "Copying polkit ${filepolkit} (${dname}/${filepolkit}) found on package ${P}!" 
+		if [ "${typefile}" = "action" ]; then 
+			mkdir -p "${FPATH}/${P}${POLKIT_PATH_ACTIONS}" 
+			cp ${dname}/${filepolkit} ${FPATH}/${P}${POLKIT_PATH_ACTIONS}/${filepolkit}.${naction}.policy
+		fi
+                if [ "${typefile}" = "rule" ]; then
+			mkdir -p "${FPATH}/${P}${POLKIT_PATH_RULES}" 
+			cp ${dname}/${filepolkit} ${FPATH}/${P}${POLKIT_PATH_RULES}/${filepolkit}.${naction}.rules
+		fi
                 naction=$(($naction+1))
             done;
         fi
     done
 
     if [ -d "${FPATH}/${P}${POLKIT_PATH_ACTIONS}" -o -d "${FPATH}/${P}${POLKIT_PATH_RULES}" ] ; then
-    #    debug "Adding postinst, postrm & depends"
-    #    add_postinst "dh_install_polkit" "$P"
-    #    add_postrm "dh_install_polkit" "$P"
         add_depends_polkit "$P"
-    #else
-    #    debug "${FPATH}/${P}${POLKIT_PATH_ACTIONS} or ${FPATH}/${P}${POLKIT_PATH_RULES} not found ! not adding postinst, postrm & depends"
     fi
     return 0
 }
