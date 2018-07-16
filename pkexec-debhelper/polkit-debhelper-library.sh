@@ -100,7 +100,7 @@ process_pkexec_file(){
 			if [ "$XREQUIRED" = "yes" ]; then
 				add_depends_xpkexec $PKG
 			fi
-			unset CMD PREFIX ICON XREQUIRE
+			unset CMD PREFIX ICON XREQUIRED
 		else
 			KEY=${line%%=*}
 		        VAL=${line#*=}
