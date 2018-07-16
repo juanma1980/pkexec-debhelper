@@ -3,6 +3,6 @@ use warnings;
 use strict;
 use Debian::Debhelper::Dh_Lib;
 
-insert_after("dh_install", "dh_installpolkit");
+insert_after("dh_install", "dh_pkexec");
 
 1;
