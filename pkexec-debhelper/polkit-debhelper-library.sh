@@ -143,7 +143,7 @@ apply_polkit_debian_configs(){
 	    mv debian/pkexec debian/$P.pkexec
     fi
     PKEXECPATH=$(find ${FPATH} -name "${P}.pkexec")
-    if [ -n "$PKEXECPATH" ];
+    if [ -n "$PKEXECPATH" ]; then
 	    process_pkexec_file $P $PKEXECPATH
     fi
 
