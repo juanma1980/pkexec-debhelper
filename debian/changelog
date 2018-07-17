@@ -1,4 +1,4 @@
-polkit-debhelper (0.1) bionic; urgency=medium
+pkexec-debhelper (0.1) bionic; urgency=medium
 
   * Initial Release.
 

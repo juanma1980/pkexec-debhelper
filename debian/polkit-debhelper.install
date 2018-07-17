@@ -1,4 +1,0 @@
-bin/xpkexec		/usr/bin/
-bin/dh_installpolkit	/usr/bin/
-polkit-debhelper 	/usr/share
-Sequence		/usr/share/perl5/Debian/Debhelper

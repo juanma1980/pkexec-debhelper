@@ -1,4 +1,4 @@
-Source: polkit-debhelper
+Source: pkexec-debhelper
 Section: utils
 Priority: optional
 Maintainer: M.Angel Juan <m.angel.juan@gmail.com>
@@ -8,7 +8,7 @@ Homepage: <insert the upstream URL, if relevant>
 #Vcs-Git: https://anonscm.debian.org/collab-maint/polkit-debhelper.git
 #Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/polkit-debhelper.git
 
-Package: polkit-debhelper
+Package: pkexec-debhelper
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python, policykit-1
 Description: Debhelper to generate polkit actions
