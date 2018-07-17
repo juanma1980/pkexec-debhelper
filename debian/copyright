@@ -1,9 +1,10 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: polkit-debhelper
-Source: https://github.com/edupals/polkit-debhelper
+Source: https://github.com/edupals/pkexec-debhelper
 
 Files: *
 Copyright: 2018 <m.angel.juan@gmail.com>
+                <raurodse@gmail.com>
 License: GPL-3.0+
 
 License: GPL-3.0+

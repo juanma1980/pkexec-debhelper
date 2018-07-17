@@ -17,3 +17,7 @@
 %:
 	dh $@
 
+override_dh_install:
+	marked-man docs/man.md > docs/dh_pkexec.1
+	dh_install
+

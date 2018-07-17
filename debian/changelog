@@ -1,5 +1,5 @@
 pkexec-debhelper (0.1) bionic; urgency=medium
 
-  * Initial Release.
+  * Initial Release. (Renamed project from polkit-debhelper)
 
- -- M.Angel Juan <m.angel.juan@gmail.com>  Thu, 11 Jan 2018 14:58:30 +0100
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Tue, 17 Jul 2018 12:23:54 +0200
