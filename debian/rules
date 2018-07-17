@@ -18,6 +18,6 @@
 	dh $@
 
 override_dh_install:
-	marked-man doc/man.md > doc/dh_pkexec.1
+	marked-man doc/dh_pkexec.md > doc/dh_pkexec.1
 	dh_install
 
