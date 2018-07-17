@@ -1,0 +1,3 @@
+bin/dh_pkexec		/usr/bin/
+pkexec-debhelper 	/usr/share
+Sequence		/usr/share/perl5/Debian/Debhelper
