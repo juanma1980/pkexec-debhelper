@@ -1,0 +1,4 @@
+[{{cmd}}]
+Identity={{autentication}}
+Action={{prefix}}.{{nameaction}}
+ResultActive=yes
