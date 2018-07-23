@@ -62,7 +62,16 @@ class PkexecDebhelper():
         return True
     
     def generate_pkla(self, pkg, pkg_conf):
-        
+        destfolder = "debian/{pkg}.polkit.pkla/".format(pkg)
+        pkg_conf = self.default_values_pkg_conf(pkg_conf)
+        if not pkg_conf or ( len(pkg_conf['groups']) == 0 and len(pkg_conf['users']) == 0 ):
+            return False
+        if not os.path.exists(destfolder):
+            os.makedirs(destfolder)
+        template = self.tpl_env.get_template('pkla.skel')
+        with open("{0}{1}.{2}".format(destfolder, pkg_conf['prefix'], pkg),'w') as fd:
+            fd.write(template.render(pkg_conf))
+        return True
 
 
     def default_values_pkg_conf(self, pkg_conf):

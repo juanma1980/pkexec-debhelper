@@ -1,4 +1,5 @@
 [{{cmd}}]
-Identity={{autentication}}
+Identity={% for group in groups %}unix-group:{{group}};{% endfor %}{% for user in users %}unix-user:{{user}};{% endfor %}
 Action={{prefix}}.{{nameaction}}
 ResultActive=yes
+ResultAny=yes

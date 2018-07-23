@@ -1,0 +1,14 @@
+[
+    {
+        'cmd': '/usr/bin/lliurex-nat',
+        'prefix': 'net.lliurex.zero-center',
+        'nameaction': 'lliurex-nat',
+        'icon': 'valentin',
+        'auth': {
+            'default':{ 'any':'no', 'inactive':'no', 'active':'yes'},
+            'list': [
+                {'type':'group', 'name': 'students', 'any':'no', 'inactive':'no', 'active':'yes'},
+            ]
+        }
+    }
+]
