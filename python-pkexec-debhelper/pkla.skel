@@ -1,5 +1,17 @@
+{% for auth in auths %}
 [{{cmd}}]
-Identity={% for group in groups %}unix-group:{{group}};{% endfor %}{% for user in users %}unix-user:{{user}};{% endfor %}
+Identity={% for member in auth.members %}{% if auth.type == 'group' %}unix-group:{% else %}unix-user:{% endif %}{{member}};
+{% endfor %}
 Action={{prefix}}.{{nameaction}}
-ResultActive=yes
-ResultAny=yes
+{% if auth.active %}
+ResultActive={{auth.active}}
+{% endif%}
+{% if auth.any %}
+ResultAny={{auth.any}}
+{% endif%}
+{% if auth.inactive %}
+ResultInactive={{auth.inactive}}
+{% endif%}
+
+
+{% endfor %}

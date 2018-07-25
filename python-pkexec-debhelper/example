@@ -1,14 +1,37 @@
 [
     {
-        'cmd': '/usr/bin/lliurex-nat',
-        'prefix': 'net.lliurex.zero-center',
-        'nameaction': 'lliurex-nat',
-        'icon': 'valentin',
-        'auth': {
-            'default':{ 'any':'no', 'inactive':'no', 'active':'yes'},
-            'list': [
-                {'type':'group', 'name': 'students', 'any':'no', 'inactive':'no', 'active':'yes'},
+        "cmd": "/usr/bin/lliurex-nat",
+        "prefix": "net.lliurex.zero-center",
+        "nameaction": "lliurex-nat",
+        "icon": "valentin",
+        "auths": {
+            "default":{ "any":"no", "inactive":"no", "active":"yes"},
+            "list": [
+                {"type":"group", "name": "students", "any":"no", "inactive":"no", "active":"yes"}
             ]
         }
+    },
+    {
+        "cmd": "/usr/bin/zero-center",
+        "prefix": "net.lliurex.zero-center",
+        "nameaction": "zero-center",
+        "icon": "valentin",
+        "auths": [
+            { "type":"group", "members": ["students"], "any":"no", "inactive":"no", "active":"yes"},
+            { "type":"user", "members": ["alu01"], "any":"no", "inactive":"no", "active":"yes"}
+        ],
+        "default_auth" :{"any":"no", "inactive":"no", "active":"yes" }
+    },
+    {
+        "cmd": "/usr/bin/zero-center-super",
+        "prefix": "net.lliurex.zero-center",
+        "nameaction": "zero-center",
+        "icon": "valentin",
+        "auths": [
+            { "type":"group", "members": ["students,teachers"], "any":"yes", "inactive":"no"},
+            { "type":"user", "members": ["alu01,alu02,alu03"], "any":"yes"},
+            { "type":"user", "members": ["alu04,alu05,alu06"], "inactive":"no"}
+        ],
+        "default_auth" :{"any":"no", "inactive":"no", "active":"yes" }
     }
 ]

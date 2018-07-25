@@ -3,19 +3,15 @@
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
-  <action id="{{prefix}}.{{nameaction}}">
-    <message gettext-domain="{{cmd}}">Authentication is required to run {{cmd}}</message>
+  <action id="{{ prefix }}.{{ nameaction }}">
+    <message gettext-domain="{{ cmd }}">Authentication is required to run {{ cmd }}</message>
     <icon_name>{{icon}}</icon_name>
     <defaults>
-      <allow_any>no</allow_any>
-      <allow_inactive>no</allow_inactive>
-      {% if groups|length > 1 or users|length > 1%}
-      <allow_active>no</allow_active>
-      {%else%}
-      <allow_active>yes</allow_active>
-      {%endif%}
+      <allow_any>{{ default_auth.any }}</allow_any>
+      <allow_inactive>{{ default_auth.inactive }}</allow_inactive>
+      <allow_active>{{ default_auth.active }}</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">{{cmd}}</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">{{ cmd }}</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
 </policyconfig>
