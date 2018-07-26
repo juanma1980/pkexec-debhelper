@@ -92,9 +92,9 @@ process_pkexec_file(){
 	PKG=$1
 	shift
 	FILETOREAD=$1
+    DESTFOLDER="debian/${PKG}.polkit.action"
 	while read line; do
 		if [ "$line" = "" ]; then
-			DESTFOLDER="debian/${PKG}.polkit.action"
 			mkdir -p $DESTFOLDER
 			polkit_gen_action $CMD $PREFIX $PKG $ICON > "${DESTFOLDER}/${PREFIX}.${PKG}"
 			if [ "$XREQUIRED" = "yes" ]; then
@@ -115,10 +115,10 @@ process_pkexec_file(){
 
 	if [ "$CMD" != "" ]; then
 		mkdir -p $DESTFOLDER
-                polkit_gen_action $CMD $PREFIX $PKG $ICON > "${DESTFOLDER}/${PREFIX}.${PKG}"
-                if [ "$XREQUIRED" = "yes" ]; then
-                   add_depends_xpkexec $PKG
-                fi
+        polkit_gen_action $CMD $PREFIX $PKG $ICON > "${DESTFOLDER}/${PREFIX}.${PKG}"
+        if [ "$XREQUIRED" = "yes" ]; then
+            add_depends_xpkexec $PKG
+        fi
 	fi
 }
 

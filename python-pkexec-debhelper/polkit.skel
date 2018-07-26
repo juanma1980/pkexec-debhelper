@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <action id="{{ prefix }}.{{ nameaction }}">
+    <message gettext-domain="{{ cmd }}">Authentication is required to run {{ cmd }}</message>
+    <icon_name>{{icon}}</icon_name>
+    <defaults>
+      <allow_any>{{ default_auth.any }}</allow_any>
+      <allow_inactive>{{ default_auth.inactive }}</allow_inactive>
+      <allow_active>{{ default_auth.active }}</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">{{ cmd }}</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>
