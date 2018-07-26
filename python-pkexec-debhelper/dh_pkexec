@@ -180,9 +180,9 @@ class PkexecDebhelper():
 def main():
     pkexec = PkexecDebhelper()
     if os.path.exists('debian/control'):
-        control = control.Control('debian/control')
-        packages = [ e['Package'] for e in control.paragraphs if 'Package' in e ]
-        source = [ e['Source'] for e in control.paragraphs if 'Source' in e ][0]
+        control_handler = control.Control('debian/control')
+        packages = [ e['Package'] for e in control_handler.paragraphs if 'Package' in e ]
+        source = [ e['Source'] for e in control_handler.paragraphs if 'Source' in e ][0]
         if source in packages:
             if os.path.exists('debian/pkexec'):
                 move('debian/pkexec','debian/{0}.pkexec'.format(source))
