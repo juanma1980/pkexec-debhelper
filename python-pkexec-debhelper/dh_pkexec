@@ -6,7 +6,7 @@ import glob
 from shutil import move
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
-from devscripts import Control
+from devscripts import control
 
 class PkexecDebhelper():
     def __init__(self, debug=False, audience='vendor'):
@@ -180,7 +180,7 @@ class PkexecDebhelper():
 def main():
     pkexec = PkexecDebhelper()
     if os.path.exists('debian/control'):
-        control = Control('debian/control')
+        control = control.Control('debian/control')
         packages = [ e['Package'] for e in control.paragraphs if 'Package' in e ]
         source = [ e['Source'] for e in control.paragraphs if 'Source' in e ][0]
         if source in packages:
