@@ -86,7 +86,7 @@ class PkexecDebhelper():
                 'ext' : 'pkla' }
         ]
         for element in paths_polkit_files:
-            if not os.path.exists(element['origs']):
+            if not os.path.exists(element['orig']):
                 continue
             list_files = glob.glob(os.path.join(element['orig'],'*'))
             if len(list_files) > 0:
