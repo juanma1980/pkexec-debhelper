@@ -1,4 +1,0 @@
-python-pkexec-debhelper/dh_pkexec		/usr/bin/
-python-pkexec-debhelper/pkla.skel 	/usr/share/pkexec-debhelper/skel/
-python-pkexec-debhelper/polkit.skel 	/usr/share/pkexec-debhelper/skel/
-Sequence		/usr/share/perl5/Debian/Debhelper
