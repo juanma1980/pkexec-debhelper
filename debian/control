@@ -13,7 +13,7 @@ Standards-Version: 4.1.2
 
 Package: pkexec-debhelper
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python, policykit-1
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, policykit-1
 Description: Debhelper to generate polkit actions
  Debhelper to generate polkit actions
 
