@@ -1,7 +1,7 @@
 {% for auth in auths %}
 [{{cmd}}]
-Identity={% for member in auth.members %}{% if auth.type == 'group' %}unix-group:{% else %}unix-user:{% endif %}{{member}};
-{% endfor %}
+Identity={% for member in auth.members %}{% if auth.type == 'group' %}unix-group:{% else %}unix-user:{% endif %}{{member}};{% endfor %}
+
 Action={{prefix}}.{{nameaction}}
 {% if auth.active %}
 ResultActive={{auth.active}}

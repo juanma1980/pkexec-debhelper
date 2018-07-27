@@ -2,7 +2,7 @@
 import os
 from shutil import move
 from devscripts import control
-from edupals.pkexec import PkexecDebhelper
+from edupals.pkexec.pkexechelper import PkexecDebhelper
 
 def main():
     pkexec = PkexecDebhelper()
