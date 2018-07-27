@@ -16,9 +16,3 @@ Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, python3, policykit-1
 Description: Debhelper to generate polkit actions
  Debhelper to generate polkit actions
-
-Package: xpkexec
-Architecture: all
-Depends: policykit-1
-Description: Add gui executable for pkexec
- Execute gui with pkexec
