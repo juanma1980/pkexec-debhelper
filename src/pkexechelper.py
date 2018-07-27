@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import sys
 import json
@@ -6,7 +5,6 @@ import glob
 from shutil import move
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
-from devscripts import control
 
 class PkexecDebhelper():
     def __init__(self, debug=False, audience='vendor'):
@@ -176,28 +174,3 @@ class PkexecDebhelper():
                 pkg_conf['default_auth']['active'] = default_auth
 
         return pkg_conf
-
-def main():
-    pkexec = PkexecDebhelper()
-    if os.path.exists('debian/control'):
-        control_handler = control.Control('debian/control')
-        packages = [ e['Package'] for e in control_handler.paragraphs if 'Package' in e ]
-        source = [ e['Source'] for e in control_handler.paragraphs if 'Source' in e ][0]
-        if source in packages:
-            if os.path.exists('debian/pkexec'):
-                move('debian/pkexec','debian/{0}.pkexec'.format(source))
-            if os.path.exists('debian/polkit.action'):
-                move('debian/polkit.action','debian/{0}.polkit.action'.format(source))
-            if os.path.exists('debian/polkit.rules'):
-                move('debian/polkit.rules','debian/{0}.polkit.rules'.format(source))
-            if os.path.exists('debian/polkit.pkla'):
-                move('debian/polkit.pkla','debian/{0}.polkit.pkla'.format(source))
-        for pkg in packages:
-            file_helper = "debian/{pkg}.pkexec".format(pkg=pkg)
-            if os.path.exists(file_helper):
-                pkexec.process_pkexec_file(pkg, file_helper)
-            pkexec.install_polkit_files(pkg)
-
-if __name__ == '__main__':
-    main()
-
