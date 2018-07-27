@@ -4,6 +4,17 @@
    dh_pkexec
 
 ## DESCRIPTION
+   Generate and install policykit files from configuration file. On this file set command to launch with pkexec, prefix and nameaction needed by polkit ( work as identifier ), auths definitions, default auth and if this application require X server to work.
+   Auths definition is a list of dictionaries. Fields are :
+  * "type": valid values are "group" or user. Define type of members
+  * "members": list of members of auth
+  * "any": authentication for users from other client ( SSH, XDMCP, ...)
+  * "inactive": 
+  * "active": autentication required for user on active X session has been display.
+Values for "any", "inactive" and "active" fields has been indicated on polkit manpage
+If you don't config neither "auths" not "default_auths", auths by default are "yes" for all values. If don't config default_auth but auths has been writed, default_auth for all config will be "no"
+
+Can see example on "FILES" section
 
 ## FILES
 	debian/package.pkexec
@@ -20,7 +31,7 @@
 					{ "type":"user", "members": ["alu01"], "any":"no", "inactive":"no", "active":"yes"}
 				],
 				"default_auth" :{"any":"no", "inactive":"no", "active":"no" },
-				"xrequired": True
+				"requiredx": True
 			},
 			{
 				"cmd": "/usr/bin/zero-center-super",
