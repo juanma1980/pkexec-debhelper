@@ -18,5 +18,5 @@ if __name__ == '__main__':
 		packages = ['edupals.pkexec'],
 		package_dir = {'edupals.pkexec':'src'},
 		scripts=['bin/dh_pkexec'],
-		data_files=[('/usr/share/perl5/Debian/Debhelper/Sequence/',['Secuence/pkexec.pm']),('/usr/share/pkexec-debhelper/skel/',['templates/pkla.skel','templates/polkit.skel'])]
+		data_files=[('/usr/share/perl5/Debian/Debhelper/Sequence/',['Sequence/pkexec.pm']),('/usr/share/pkexec-debhelper/skel/',['templates/pkla.skel','templates/polkit.skel'])]
 	)
