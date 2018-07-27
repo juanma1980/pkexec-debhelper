@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import os
 import sys
 import json
@@ -6,7 +5,6 @@ import glob
 from shutil import move
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
-from devscripts import control
 
 class PkexecDebhelper():
     def __init__(self, debug=False, audience='vendor'):
@@ -17,7 +15,7 @@ class PkexecDebhelper():
         self.tpl_env = Environment(loader=FileSystemLoader('/usr/share/pkexec-debhelper/skel'),lstrip_blocks=True,trim_blocks=True)
         self.debug = debug
         self.audience = audience
-    
+
     def debug_message(self, message):
         print(message)
 
@@ -37,7 +35,7 @@ class PkexecDebhelper():
     def generate_polkit_files(self, pkg, pkg_conf):
         self.generate_polkit_actions(pkg, pkg_conf)
         self.generate_polkit_pkla(pkg, pkg_conf)
-        
+
     def generate_polkit_actions(self, pkg, pkg_conf):
         """
             create actions files on PKG.polkit.pkla folder from configuration package
@@ -46,7 +44,7 @@ class PkexecDebhelper():
         template = self.tpl_env.get_template('polkit.skel')
         self.exists_or_create( destfolder )
         self.save_template( pkg_conf, template, "{0}{1}.{2}".format(destfolder, pkg_conf['prefix'], pkg))
-    
+
     def generate_polkit_pkla(self, pkg, pkg_conf):
         """
             create pkla files on PKG.polkit.pkla folder from configuration package
@@ -75,7 +73,7 @@ class PkexecDebhelper():
             {
                 'orig': 'debian/{pkg}.polkit.action'.format(pkg=pkg),
                 'dest': 'debian/{pkg}/{dest}'.format(pkg=pkg,dest=self.polkit_path_actions),
-                'ext' : 'policy'}, 
+                'ext' : 'policy'},
             {
                 'orig': 'debian/{pkg}.polkit.rules'.format(pkg=pkg),
                 'dest': 'debian/{pkg}/{dest}'.format(pkg=pkg,dest=self.polkit_path_rules),
@@ -113,7 +111,7 @@ class PkexecDebhelper():
             #print "_mkdir %s" % repr(folder)
             if tail:
                 os.mkdir(folder)
-    
+
     def get_path_audience(self):
         """
             Return path explained polkit-1 documentation
@@ -128,7 +126,7 @@ class PkexecDebhelper():
         if self.audience == "mandatory":
             folder = "90.mandatory.d"
         return folder
-            
+
 
     def save_template(self, variables, template, dest):
         """
@@ -137,7 +135,7 @@ class PkexecDebhelper():
         output_file = self.get_not_exists_filepath(dest)
         with open(output_file,'w') as fd:
             fd.write(template.render(variables))
-    
+
     def default_values_pkg_conf(self, pkg_conf):
         """
             Define default values for pkg configuration.
@@ -176,28 +174,3 @@ class PkexecDebhelper():
                 pkg_conf['default_auth']['active'] = default_auth
 
         return pkg_conf
-
-def main():
-    pkexec = PkexecDebhelper()
-    if os.path.exists('debian/control'):
-        control_handler = control.Control('debian/control')
-        packages = [ e['Package'] for e in control_handler.paragraphs if 'Package' in e ]
-        source = [ e['Source'] for e in control_handler.paragraphs if 'Source' in e ][0]
-        if source in packages:
-            if os.path.exists('debian/pkexec'):
-                move('debian/pkexec','debian/{0}.pkexec'.format(source))
-            if os.path.exists('debian/polkit.action'):
-                move('debian/polkit.action','debian/{0}.polkit.action'.format(source))
-            if os.path.exists('debian/polkit.rules'):
-                move('debian/polkit.rules','debian/{0}.polkit.rules'.format(source))
-            if os.path.exists('debian/polkit.pkla'):
-                move('debian/polkit.pkla','debian/{0}.polkit.pkla'.format(source))
-        for pkg in packages:
-            file_helper = "debian/{pkg}.pkexec".format(pkg=pkg)
-            if os.path.exists(file_helper):
-                pkexec.process_pkexec_file(pkg, file_helper)
-            pkexec.install_polkit_files(pkg)
-
-if __name__ == '__main__':
-    main()
-
