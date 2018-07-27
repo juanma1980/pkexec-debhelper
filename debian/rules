@@ -17,7 +17,12 @@ export PYBUILD_NAME=pkexec-debhelper
 %:
 	dh $@ --with python3 --buildsystem pybuild
 
-#override_dh_install:
-#	marked-man doc/dh_pkexec.md > doc/dh_pkexec.1
-#	dh_install
+override_dh_auto_install:
+	override_dh_auto_install
+	python3 setup.py install --root $(CURDIR)/debian/python3-pkexec-debhelper --prefix=/usr
+	python3 setup.py clean --all
+
+override_dh_install:
+	marked-man doc/dh_pkexec.md > doc/dh_pkexec.1
+	dh_install
 
