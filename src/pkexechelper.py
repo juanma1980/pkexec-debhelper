@@ -20,7 +20,7 @@ class PkexecDebhelper():
         print(message)
 
     def add_misc_dependency(self, pkg, dependency):
-        with open ('debian/${pkg}.substvars'.format(pkg=pkg),'a') as depfile:
+        with open ('debian/{pkg}.substvars'.format(pkg=pkg),'a') as depfile:
             depfile.write('misc:Depends=' + dependency)
 
     def process_pkexec_file(self, pkg, file_to_parse):
