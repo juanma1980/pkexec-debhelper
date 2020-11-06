@@ -19,6 +19,6 @@ Description: Debhelper to generate polkit actions
 
 Package: xpkexec
 Architecture: all
-Depends: policykit-1, python
+Depends: policykit-1, python3
 Description: Add gui executable for pkexec
  Execute gui with pkexec

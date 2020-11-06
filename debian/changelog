@@ -1,3 +1,9 @@
+pkexec-debhelper (0.3) focal; urgency=medium
+
+  * Focal release
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 06 Nov 2020 14:00:44 +0100
+
 pkexec-debhelper (0.2) bionic; urgency=medium
 
   * Fix Typo: Add depends variable

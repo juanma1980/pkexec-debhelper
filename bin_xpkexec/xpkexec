@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 import subprocess
 
@@ -6,7 +6,7 @@ lcmd=['pkexec']
 lcmd.extend(sys.argv[1:])
 try:
     subprocess.check_output(['xhost','+SI:localuser:root'],stdin=None,stderr=None)
-    print '{}'.format(subprocess.check_output(lcmd))
+    print('{}'.format(subprocess.check_output(lcmd)))
     subprocess.check_output(['xhost','-SI:localuser:root'],stdin=None,stderr=None)
 except Exception as e:
-    print e
+    print(e)
