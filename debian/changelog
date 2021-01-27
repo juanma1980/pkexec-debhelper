@@ -1,3 +1,9 @@
+pkexec-debhelper (0.4) focal; urgency=medium
+
+  * Add python3-jinja2 dependency
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Wed, 27 Jan 2021 12:30:13 +0100
+
 pkexec-debhelper (0.3) focal; urgency=medium
 
   * Focal release
