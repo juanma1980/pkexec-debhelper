@@ -1,0 +1,24 @@
+Source: pkexec-debhelper
+Section: utils
+Priority: optional
+Maintainer: LliureX Team <lliurex@gva.es>
+Build-Depends: debhelper (>= 9), 
+               node-marked-man, 
+               devscripts,
+               dh-python,
+               python3-setuptools,
+               python3-all
+Standards-Version: 4.1.2
+#Vcs-Git: https://anonscm.debian.org/collab-maint/polkit-debhelper.git
+
+Package: python3-pkexec-debhelper
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3, policykit-1, python3-jinja2
+Description: Debhelper to generate polkit actions
+ Debhelper to generate polkit actions
+
+Package: xpkexec
+Architecture: all
+Depends: policykit-1, python3
+Description: Add gui executable for pkexec
+ Execute gui with pkexec

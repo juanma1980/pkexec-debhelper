@@ -1,0 +1,23 @@
+pkexec-debhelper (0.4) focal; urgency=medium
+
+  * Add python3-jinja2 dependency
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Wed, 27 Jan 2021 12:30:13 +0100
+
+pkexec-debhelper (0.3) focal; urgency=medium
+
+  * Focal release
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 06 Nov 2020 14:00:44 +0100
+
+pkexec-debhelper (0.2) bionic; urgency=medium
+
+  * Fix Typo: Add depends variable
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Mon, 30 Jul 2018 14:53:08 +0200
+
+pkexec-debhelper (0.1) bionic; urgency=medium
+
+  * Initial Release. (Renamed project from polkit-debhelper)
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Tue, 17 Jul 2018 12:23:54 +0200
