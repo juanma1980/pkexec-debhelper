@@ -175,7 +175,7 @@ class PkexecDebhelper():
         basename=os.path.basename(".".join(pkg_conf["cmd"].split(".")[:-1]))
         if "domain" not in pkg_conf.keys():
             pkg_conf["domain"]=os.path.basename(pkg_conf["cmd"])
-        if "basename" not in pkg_config.keys():
+        if "basename" not in pkg_conf.keys():
             pkg_conf["basename"]=os.path.basename(".".join(pkg_conf["cmd"].split(".")[:-1]))
         if "message" not in pkg_conf.keys():
             pkg_conf["pkg_conf"]="Authentication is required to run {}".format(basename)
