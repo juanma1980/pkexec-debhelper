@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools","setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pkexecdebhelper" 
+version = "0.1"
+description = "Generate polkit files from config file and install"
+authors = [
+	{ name = "Raul Rodrigo Segura", email="raulrodrigosegura@gmail.com" },
+	{ name = "LliureX Team"}
+]
+license = {text="GPL-3"}
+urls = {repository="https://github.com/edupals/pkexec-debhelper"}
+
+[tool.setuptools]
+script-files = [ "bin/dh_pkexec" ]
+#data_files=[('/usr/share/perl5/Debian/Debhelper/Sequence/',['Sequence/pkexec.pm']),('/usr/share/pkexec-debhelper/skel/',['templates/pkla.skel','templates/polkit.skel'])]
