@@ -25,5 +25,5 @@ script-files = [ 'bin/dh_pkexec']
 "edupals.pkexec" = "src"
 
 [tool.setuptools.data-files]
-'usr/share/perl5/Debian/Debhelper/Sequence/'=['Sequence/pkexec.pm']
-'usr/share/pkexec-debhelper/skel/'=['templates/pkla.skel','templates/polkit.skel']
+'share/perl5/Debian/Debhelper/Sequence/'=['Sequence/pkexec.pm']
+'share/pkexec-debhelper/skel/'=['templates/pkla.skel','templates/polkit.skel']
