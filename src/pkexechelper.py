@@ -172,5 +172,13 @@ class PkexecDebhelper():
                 pkg_conf['default_auth']['inactive'] = default_auth
             if not 'active' in pkg_conf['default_auth']:
                 pkg_conf['default_auth']['active'] = default_auth
+		basename=os.path.basename(".".join(pkg_conf["cmd"].split(".")[:-1]))
+		if "domain" not in pkg_conf.keys():
+		    pkg_conf["domain"]=os.path.basename(pkg_conf["cmd"])
+		if "basename" not in pkg_config.keys():
+		    pkg_conf["basename"]=os.path.basename(".".join(pkg_conf["cmd"].split(".")[:-1]))
+		if "message" not in pkg_conf.keys():
+		    pkg_conf["pkg_conf"]="Authentication is required to run {}".format(basename)
+
 
         return pkg_conf
