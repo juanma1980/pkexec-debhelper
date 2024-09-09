@@ -10,15 +10,16 @@ authors=[
   {name='Raul Rodrigo Segura',email='raurodse@gmail.com'},
   ]
 requires-python=">=3.8"
+urls = {repository="https://github.com/edupals/pkexec-debhelper"}
 keywords=['software','debhelper','development']
 license= {text='GPL-3'}
 classifiers=[
   "Programming Language :: Python :: 3",
-  ]
-scripts=['bin/dh_pkexec']
-data_files=[('/usr/share/perl5/Debian/Debhelper/Sequence/',['Sequence/pkexec.pm']),('/usr/share/pkexec-debhelper/skel/',['templates/pkla.skel','templates/polkit.skel'])]
-dependencies=[
-  "requests",
-  "QtExtraWidgets",
-  "bs4"
-  ]
+
+]
+[tool.setuptools]
+script-files = [ 'bin/dh_pkexec']
+
+[tool.setuptools.data-files]
+	'usr/share/perl5/Debian/Debhelper/Sequence/'=['Sequence/pkexec.pm']
+	'usr/share/pkexec-debhelper/skel/'=['templates/pkla.skel','templates/polkit.skel']
