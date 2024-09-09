@@ -1,3 +1,9 @@
+pkexec-debhelper (0.15) noble; urgency=medium
+
+  * Noble release
+
+ -- Juanma1980 <juanma1980@gmail.com>  Mon, 09 Sep 2024 10:48:04 +0200
+
 pkexec-debhelper (0.14) jammy; urgency=medium
 
   * Initial release for Jammy
