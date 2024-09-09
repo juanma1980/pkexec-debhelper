@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9),
                node-marked-man, 
                devscripts,
                dh-python,
-               python3-setuptools,
+			   pybuild-plugin-pyproject,
                python3-all
 Standards-Version: 4.1.2
 #Vcs-Git: https://anonscm.debian.org/collab-maint/polkit-debhelper.git
