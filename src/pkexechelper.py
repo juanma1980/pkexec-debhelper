@@ -116,15 +116,15 @@ class PkexecDebhelper():
         """
             Return path explained polkit-1 documentation
         """
-        folder = "10.vendor.d"
+        folder = "10-vendor.d"
         if self.audience == "org":
-            folder = "20.org.d"
+            folder = "20-org.d"
         if self.audience == "site":
-            folder = "30.site.d"
+            folder = "30-site.d"
         if self.audience == "local":
-            folder = "50.local.d"
+            folder = "50-local.d"
         if self.audience == "mandatory":
-            folder = "90.mandatory.d"
+            folder = "90-mandatory.d"
         return folder
 
 
