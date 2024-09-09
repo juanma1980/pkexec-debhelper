@@ -17,9 +17,13 @@ classifiers=[
   "Programming Language :: Python :: 3",
 
 ]
+
 [tool.setuptools]
 script-files = [ 'bin/dh_pkexec']
 
+[tool.setuptools.package-dir]
+"edupals.pkexec" = "src"
+
 [tool.setuptools.data-files]
-	'usr/share/perl5/Debian/Debhelper/Sequence/'=['Sequence/pkexec.pm']
-	'usr/share/pkexec-debhelper/skel/'=['templates/pkla.skel','templates/polkit.skel']
+'usr/share/perl5/Debian/Debhelper/Sequence/'=['Sequence/pkexec.pm']
+'usr/share/pkexec-debhelper/skel/'=['templates/pkla.skel','templates/polkit.skel']
