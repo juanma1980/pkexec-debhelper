@@ -1,3 +1,9 @@
+pkexec-debhelper (0.17) noble; urgency=medium
+
+  * Add support to rules files 
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Tue, 10 Sep 2024 14:18:53 +0200
+
 pkexec-debhelper (0.16) noble; urgency=medium
 
   * Replace dot by hyphen 
