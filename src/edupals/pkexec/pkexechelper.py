@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import glob
-from shutil import move
+from shutil import move, copy
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
 
@@ -35,6 +35,7 @@ class PkexecDebhelper():
     def generate_polkit_files(self, pkg, pkg_conf):
         self.generate_polkit_actions(pkg, pkg_conf)
         self.generate_polkit_pkla(pkg, pkg_conf)
+        self.generate_polkit_rules(pkg, pkg_conf)
 
     def generate_polkit_actions(self, pkg, pkg_conf):
         """
@@ -53,6 +54,19 @@ class PkexecDebhelper():
         template = self.tpl_env.get_template('pkla.skel')
         self.exists_or_create( destfolder )
         self.save_template( pkg_conf, template, "{0}{1}.{2}".format(destfolder, pkg_conf['prefix'], pkg))
+
+    def generate_polkit_rules(self, pkg, pkg_conf):
+        """
+            create rules files on PKG.polkit.rules folder from configuration package_conf
+        """
+        destfolder = "debian/{pkg}.polkit.rules/".format(pkg=pkg)
+        self.exists_or_create( destfolder )
+        if "rules" in pkg_conf.keys():
+            for rule in pkg_conf["rules"]:
+                copy( rule, destfolder)
+        else:
+            template = self.tpl_env.get_template('rules.skel')
+            self.save_template( pkg_conf, template, "{0}{1}.{2}".format(destfolder, pkg_conf['prefix'], pkg))
 
     def get_not_exists_filepath(self, file_path):
         """
