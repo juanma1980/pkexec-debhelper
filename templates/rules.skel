@@ -1,24 +1,21 @@
 {% for auth in auths %}
 polkit.addRule(function(action, subject){
 	if ( action.id == "{{prefix}}"){
+		const members = {{auth.members}};
+		for ( i in members ){
 		{% if auth.type == "group" %}
-		{{auth.members}}.forEach(function(group_name){
+			var group_name = members[i];
 			if ( subject.isInGroup(group_name)){
-				if ( subject.active && subject.local ) return {{auth.active}};
-				else if ( !subject.active && subject.local ) return {{auth.inactive}};
-				else return {{auth.any}};
+		{% elif auth.type == "user" %}
+			var user_name = members[i];
+			if ( subject.user == user_name ){
+		{% endif %}
+				if ( subject.active && subject.local ) return "{{auth.active}}";
+				else if ( !subject.active && subject.local ) return "{{auth.inactive}}";
+				else return "{{auth.any}}";
 			}
 
-		});
-		{% elif auth.type == "user" %}
-		{{auth.members}}.forEach(function(user_name){
-			if ( subject.user == user_name ){
-				if ( subject.active && subject.local ) return {{auth.active}};
-				else if ( !subject.active && subject.local ) return {{auth.inactive}};
-				else return {{auth.any}};
-			}
-		});
-		{% endif %}
+		}
 
 	}
 });
