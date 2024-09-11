@@ -1,20 +1,20 @@
 {% for auth in auths %}
 polkit.addRule(function(action, subject){
 	if ( action.id == "{{prefix}}"){
-		{% if type = "group" %}
+		{% if type == "group" %}
 		{{auth.members}}.forEach(function(group_name){
 			if ( subject.isInGroup(group_name)){
 				if ( subject.active && subject.local ) return {{auth.active}};
-				elif ( !subject.active && subject.local ) return {{auth.inactive}};
+				else if ( !subject.active && subject.local ) return {{auth.inactive}};
 				else return {{auth.any}};
 			}
 
 		});
-		{% elif type = "user" %}
+		{% elif type == "user" %}
 		{{auth.members}}.forEach(function(user_name){
 			if ( subject.user == user_name ){
 				if ( subject.active && subject.local ) return {{auth.active}};
-				elif ( !subject.active && subject.local ) return {{auth.inactive}};
+				else if ( !subject.active && subject.local ) return {{auth.inactive}};
 				else return {{auth.any}};
 			}
 		});
