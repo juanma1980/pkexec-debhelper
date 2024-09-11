@@ -1,3 +1,9 @@
+pkexec-debhelper (0.17.3) noble; urgency=medium
+
+  * Sync with master branch 
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Wed, 11 Sep 2024 13:33:53 +0200
+
 pkexec-debhelper (0.17.2) noble; urgency=medium
 
   * Fix rules template
