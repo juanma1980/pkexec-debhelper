@@ -1,7 +1,7 @@
 {% for auth in auths %}
 polkit.addRule(function(action, subject){
 	if ( action.id == "{{prefix}}"){
-		{% if type == "group" %}
+		{% if auth.type == "group" %}
 		{{auth.members}}.forEach(function(group_name){
 			if ( subject.isInGroup(group_name)){
 				if ( subject.active && subject.local ) return {{auth.active}};
@@ -10,7 +10,7 @@ polkit.addRule(function(action, subject){
 			}
 
 		});
-		{% elif type == "user" %}
+		{% elif auth.type == "user" %}
 		{{auth.members}}.forEach(function(user_name){
 			if ( subject.user == user_name ){
 				if ( subject.active && subject.local ) return {{auth.active}};
