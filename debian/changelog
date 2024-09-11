@@ -1,3 +1,9 @@
+pkexec-debhelper (0.17.5) noble; urgency=medium
+
+  * Add suffix to rule identifier
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Wed, 11 Sep 2024 14:44:58 +0200
+
 pkexec-debhelper (0.17.4) noble; urgency=medium
 
   * Change rules syntax to adjust ECMA-262 edition 5 version
