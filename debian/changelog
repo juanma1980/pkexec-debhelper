@@ -1,3 +1,9 @@
+pkexec-debhelper (0.18) noble; urgency=medium
+
+  * Add support to * into groups/users 
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Thu, 12 Sep 2024 12:32:59 +0200
+
 pkexec-debhelper (0.17.5) noble; urgency=medium
 
   * Add suffix to rule identifier
