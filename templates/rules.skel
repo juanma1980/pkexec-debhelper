@@ -2,6 +2,7 @@
 polkit.addRule(function(action, subject){
 	if ( action.id == "{{prefix}}.{{nameaction}}"){
 		const members = {{auth.members}};
+		if (members.indexOf('*')>=0) return polkit.Result.YES;
 		for ( i in members ){
 		{% if auth.type == "group" %}
 			var group_name = members[i];
