@@ -16,4 +16,6 @@ urls = {repository="https://github.com/edupals/pkexec-debhelper"}
 [tool.setuptools]
 script-files = [ "bin/dh_pkexec" ]
 package-dir = {"" = "src"}
-#data_files=[('/usr/share/perl5/Debian/Debhelper/Sequence/',['Sequence/pkexec.pm']),('/usr/share/pkexec-debhelper/skel/',['templates/pkla.skel','templates/polkit.skel'])]
+[tool.setuptools.data-files]
+"share/pkexec-debhelper/skel" = ["templates/pkla.skel","templates/polkit.skel"]
+"share/perl5/Debian/Debhelper/Sequence" = ["Sequence/pkexec.pm"]
