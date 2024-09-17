@@ -1,3 +1,9 @@
+pkexec-debhelper (0.19.1) noble; urgency=medium
+
+  * Install all skel files
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Tue, 17 Sep 2024 12:20:37 +0200
+
 pkexec-debhelper (0.19) noble; urgency=medium
 
   * Install all files with pyproject file 
