@@ -5,6 +5,11 @@ import glob
 from shutil import move, copy
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
+import gettext
+gettext.textdomain('pkexechelper')
+_ = gettext.gettext
+
+i18n={"MSG_RUN":_("Authentication is required to run")}
 
 class PkexecDebhelper():
     def __init__(self, debug=False, audience='vendor'):
@@ -146,6 +151,13 @@ class PkexecDebhelper():
         """
             Write template with on not exists file
         """
+        basename=os.path.basename(".".join(variables["cmd"].split(".")[:-1]))
+        if not "domain" in variables:
+            variables["domain"]=basename
+        if not "name" in variables:
+            variables["name"]=basename
+        if not "message" in variables:
+            variables["message"]="Authentication is required to run {}".format(basename)
         output_file = self.get_not_exists_filepath(dest)
         with open(output_file,'w') as fd:
             fd.write(template.render(variables))
@@ -163,10 +175,17 @@ class PkexecDebhelper():
         """
         if not 'cmd' in pkg_conf:
             return False
+        pkg_name=os.path.basename(".".join(pkg_conf["cmd"].split(".")[:-1]))
         if not 'prefix' in pkg_conf:
             pkg_conf['prefix'] = "id.generic.pkexec"
         if not 'nameaction' in pkg_conf:
             pkg_conf['nameaction'] = 'genericnameaction'
+        if not "name" in pkg_conf:
+            pkg_conf["name"]=pkg_name
+        if not "domain" in pkg_conf:
+            pkg_conf["domain"]=pkg_name
+        if not "message" in pkg_conf:
+            pkg_conf["pkg_conf"]="{0} {1}".format(i18n.get("MSG_RUN"),pkg_config["name"])
         if not 'icon' in pkg_conf:
             pkg_conf['icon'] = 'noicon'
         if not 'auths' in pkg_conf:
