@@ -4,7 +4,7 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
   <action id="{{ prefix }}.{{ nameaction }}">
-    <message gettext-domain="{{ cmd }}">Authentication is required to run {{ cmd }}</message>
+    <message gettext-domain="{{ domain }}">{{ message }}</message>
     <icon_name>{{icon}}</icon_name>
     <defaults>
       <allow_any>{{ default_auth.any }}</allow_any>
