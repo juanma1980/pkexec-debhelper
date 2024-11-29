@@ -157,7 +157,9 @@ class PkexecDebhelper():
         if not "name" in variables:
             variables["name"]=basename
         if not "message" in variables:
-            variables["message"]="Authentication is required to run {}".format(basename)
+            variables["message"]="{0} {1}".format(i18n.get("MSG_RUN"),basename)
+        if not "description" in variables:
+            variables["description"]=""
         output_file = self.get_not_exists_filepath(dest)
         with open(output_file,'w') as fd:
             fd.write(template.render(variables))
