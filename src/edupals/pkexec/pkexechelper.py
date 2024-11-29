@@ -185,7 +185,9 @@ class PkexecDebhelper():
         if not "domain" in pkg_conf:
             pkg_conf["domain"]=pkg_name
         if not "message" in pkg_conf:
-            pkg_conf["pkg_conf"]="{0} {1}".format(i18n.get("MSG_RUN"),pkg_config["name"])
+            pkg_conf["message"]="{0} {1}".format(i18n.get("MSG_RUN"),pkg_conf["name"])
+        if not "description" in pkg_conf:
+            pkg_conf["description"]=""
         if not 'icon' in pkg_conf:
             pkg_conf['icon'] = 'noicon'
         if not 'auths' in pkg_conf:
